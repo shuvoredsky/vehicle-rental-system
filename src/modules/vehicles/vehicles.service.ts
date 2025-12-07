@@ -2,10 +2,10 @@ import { Pool } from "pg";
 import { pool } from "../../config/db";
 
 const createVehicle = async (data: any)=>{
-    const {vehicles_name, type, registration_number, daily_rent_price, availability_status = "available"} = data;
+    const {vehicle_name, type, registration_number, daily_rent_price, availability_status = "available"} = data;
 
     const existingVehicle = await pool.query(
-        "SELECT * FROM vehicles WHERE registration_number.toUpperCase() = $1", [registration_number]
+        "SELECT * FROM vehicles WHERE UPPER(registration_number) = UPPER($1)", [registration_number]
     );
 
     if(existingVehicle.rows.length > 0){
@@ -13,8 +13,8 @@ const createVehicle = async (data: any)=>{
     }
 
     const result = await pool.query(`
-        INSERT INTO vehicles(vehicles_name, type, registration_number, daily_rent_price, availability_status) VALUES($1, $2, $3, $4, $5) RETURNING *
-        `, [vehicles_name, type, registration_number.toUpperCase(), daily_rent_price, availability_status])
+        INSERT INTO vehicles(vehicle_name, type, registration_number, daily_rent_price, availability_status) VALUES($1, $2, $3, $4, $5) RETURNING *
+        `, [vehicle_name, type, registration_number.toUpperCase(), daily_rent_price, availability_status])
 
         return result;
 }
@@ -36,11 +36,11 @@ const getVehiclesById = async (vehicleId: string) =>{
 
 
 const updateVehicle = async (vehicleId: string, data: any) => {
-    const { vehicles_name, type, registration_number, daily_rent_price, availability_status } = data;
+    const { vehicle_name, type, registration_number, daily_rent_price, availability_status } = data;
 
     const result = await pool.query(`
         UPDATE vehicles SET
-            vehicles_name = COALESCE($1, vehicles_name),
+            vehicle_name = COALESCE($1, vehicle_name),
             type = COALESCE($2, type),
             registration_number = COALESCE($3, registration_number),
             daily_rent_price = COALESCE($4, daily_rent_price),
@@ -49,7 +49,7 @@ const updateVehicle = async (vehicleId: string, data: any) => {
         WHERE id = $6
         RETURNING *
     `, [
-        vehicles_name,
+        vehicle_name,
         type,
         registration_number ? registration_number.toUpperCase() : null,
         daily_rent_price,

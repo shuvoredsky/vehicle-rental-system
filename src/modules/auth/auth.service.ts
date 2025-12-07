@@ -62,7 +62,7 @@ const signIn = async (email: string, password: string)=>{
             role: user.role
         },
         config.jwt_secret as string,
-        {expiresIn: config.jwt_expires_in || "7d"}
+        {expiresIn: "30d"}
     )
 
     console.log({generatedToken: token})

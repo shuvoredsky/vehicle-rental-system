@@ -95,7 +95,7 @@ Copy code
 
 ### **Vehicles Table**
 
-id, vehicles_name, type, registration_number, daily_rent_price,
+id, vehicle_name, type, registration_number, daily_rent_price,
 availability_status, created_at, updated_at
 
 yaml

@@ -4,12 +4,12 @@ import { vehicleService } from "./vehicles.service";
 
 const createVehicle = async (req: Request, res: Response)=>{
     try{
-        const {vehicles_name, type, registration_number, daily_rent_price, availability_status} = req.body;
+        const {vehicle_name, type, registration_number, daily_rent_price, availability_status} = req.body;
         
-        if(!vehicles_name || !type || !registration_number || !daily_rent_price){
+        if(!vehicle_name || !type || !registration_number || !daily_rent_price){
             return res.status(400).json({
                 success: false,
-                message: "ALl fields are require: vehicles_name, type, registration_number, daily_rent_price"
+                message: "ALl fields are require: vehicle_name, type, registration_number, daily_rent_price"
             })
         }
 

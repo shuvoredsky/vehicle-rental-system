@@ -1,5 +1,7 @@
 # 🚗 Vehicle Rental System – Backend (Node.js + TypeScript + PostgreSQL)
 
+Live Link: https://assginment-2-tau.vercel.app/
+
 A backend service for managing a **Vehicle Rental System**, built using **Node.js**, **Express**, **TypeScript**, and **PostgreSQL**.  
 This project includes full CRUD operations for **Users** and **Vehicles**, along with **JWT-based authentication**.
 

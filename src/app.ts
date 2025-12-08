@@ -17,7 +17,7 @@ app.use(logger)
 
 initDB()
 app.get('/', (req: Request ,res: Response)=>{
-    res.send("Hello worlds");
+    res.send("Vehicle Rental System Home");
 })
 
 app.use("/api/v1/auth", authRoute)

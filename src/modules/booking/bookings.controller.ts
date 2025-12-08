@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { bookingService } from "./bookings.service";
 
-// Create booking
+
 const createBooking = async (req: Request, res: Response) => {
     try {
         const { vehicle_id, rent_start_date, rent_end_date } = req.body;
         const currentUser = req.user!;
 
-        // Validation
+        
         if (!vehicle_id || !rent_start_date || !rent_end_date) {
             return res.status(400).json({
                 success: false,
@@ -38,7 +38,7 @@ const createBooking = async (req: Request, res: Response) => {
     }
 };
 
-// Get all bookings (Admin: all, Customer: own)
+
 const getBookings = async (req: Request, res: Response) => {
     try {
         const currentUser = req.user!;
@@ -62,11 +62,11 @@ const getBookings = async (req: Request, res: Response) => {
     }
 };
 
-// Update booking (Cancel or Return)
+
 const updateBooking = async (req: Request, res: Response) => {
     try {
         const bookingId = req.params.bookingId as string;
-        const { action } = req.body; // "cancel" or "return"
+        const { action } = req.body; 
         const currentUser = req.user!;
 
         if (!action || (action !== "cancel" && action !== "return")) {
@@ -76,7 +76,7 @@ const updateBooking = async (req: Request, res: Response) => {
             });
         }
 
-        // Only admin can return
+        
         if (action === "return" && currentUser.role !== "admin") {
             return res.status(403).json({
                 success: false,
